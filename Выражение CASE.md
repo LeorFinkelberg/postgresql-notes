@@ -33,3 +33,22 @@ FROM employees
 WHERE department_id IN (10, 20, 30, 40)
 ORDER BY department_id;
 ```
+
+Вывести данные о сотрудниках и размере их премии, которая задана как часть заработной платы, размер которой зависит от отдела, где работает сотрудник
+```sql
+SELECT
+  department_id,
+  employee_id,
+  first_name,
+  last_name,
+  job_id,
+  salary,
+  CASE deprment_id
+    WHEN 10 THEN 0.1 * salary
+    WHEN 30 THEN 0.2 * salary
+    WHEN 40 THEN 0.3 * salary
+  END AS bonus
+FROM employees
+WHERE department_id IN (10, 20, 30, 40)
+ORDER BY department_id;
+```

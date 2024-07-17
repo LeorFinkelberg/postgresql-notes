@@ -1,0 +1,35 @@
+Для реализации логики ветвления используется выражение `CASE`. Можно использовать два варианта выражения `CASE`:
+- Выражение `CASE` с параметром,
+- Выражение `CASE` с условием.
+### Выражение CASE с параметром
+
+Выражение `CASE` с параметром (под параметром понимается атрибут таблицы) имеет следующий синтаксис
+```bash
+CASE {parameter}
+    WHEN {value1} THEN {res1}
+   [WHEN {value2} THEN {res2}
+     ...
+    WHEN {valueN} THEN {resN}]
+   [ELSE {res_ELSE}]
+END
+```
+
+Если предложение `ELSE` отсутствует, то выражение `CASE` вернет результат `NULL`. Возвращаемый результат может быть _значением_ или _выражением_. Выражения `parameter` и `value` должны иметь один и тот же тип данных. Все возвращаемые значения должны иметь одинаковый тип данных.
+```sql
+SELECT
+  department_id,
+  employee_id,
+  first_name,
+  last_name,
+  job_id,
+  salary,
+  CASE department_id
+    WHEN 10 THEN 1000
+    WHEN 30 THEN 1200
+    WHEN 40 THEN 1500
+    ELSE 500
+  END AS bonus
+FROM employees
+WHERE department_id IN (10, 20, 30, 40)
+ORDER BY department_id;
+```

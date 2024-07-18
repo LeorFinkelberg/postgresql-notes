@@ -52,3 +52,36 @@ FROM employees
 WHERE department_id IN (10, 20, 30, 40)
 ORDER BY department_id;
 ```
+
+### Выражение CASE с условием
+
+Синтаксис
+```bash
+CASE
+  WHEN {cond1} THEN {res1}
+ [WHEN {cond2} THEN {res2}
+  ...
+  WHEN {condN} THEN {resN}]
+ [ELSE {res_ELSE}]
+END;
+```
+
+Вывести данные о сотрудниках и размере их премии, которая зависит от зарплаты сотрудника
+```sql
+SELECT
+  department_id,
+  employee_id,
+  first_name,
+  last_name,
+  job_id,
+  salary,
+  CASE 
+    WHEN salary > 10000 THEN 5000
+    WHEN salary > 7000 THEN 3000
+    WHEN salary > 5000 THEN 2000
+    ELSE 1000
+  END AS bonus
+FROM employees
+WHERE department_id in (10, 20, 30, 40)
+ORDER BY department_id;
+```

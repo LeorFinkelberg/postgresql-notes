@@ -163,3 +163,13 @@ SELECT idx + '2024-07-01'::date
 FROM GENERATE_SERIES(0, 30) t(idx)
 WHERE EXTRACT(dow, idx + '2024-07-01'::date) = 0;
 ```
+
+Вывести данные об отделах, названия которых состоят более чем из одного слова. Результат выполнения запроса должен содержать: `deprment_id`, `department_name`, второе слово в названии отдела
+```sql
+SELECT
+  deptment_id,
+  deprtment_name
+  ltrim(substring(department_name, strpos(department_name, ' '))) AS second_word
+FROM departments
+WHERE department_name ~* '.*\s.*';
+```

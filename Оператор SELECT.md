@@ -173,3 +173,14 @@ SELECT
 FROM departments
 WHERE department_name ~* '.*\s.*';
 ```
+
+Найти сотрудника с наибольшей зарплатой
+```sql
+SELECT
+  employee_id,
+  salary
+FROM employees
+WHERE salary = (SELECT MAX(salary) FROM employee)  -- подзапрос
+```
+
+NB! Списки столбцов в предложениях `SELECT` и `GROUP BY` должны совпадать [[Литература#^af0aa6]]<c. 131>
